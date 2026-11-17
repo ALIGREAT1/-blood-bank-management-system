@@ -1,0 +1,44 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Donor | BloodBank</title>
+
+    <link rel="stylesheet"
+          href="{% static 'bloodbank/css/style.css' %}">
+</head>
+
+<body>
+
+<div class="main-content">
+
+    <header class="topbar">
+        <div>
+            <h1>Register New Donor</h1>
+            <p>Enter the donor's personal information below.</p>
+        </div>
+    </header>
+
+    <div class="content-section">
+        
+<h2>{{ page_title|default:"Register New Donor" }}</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit" class="btn btn-primary">
+        {{ button_text|default:"Register Donor" }}
+    </button>
+</form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

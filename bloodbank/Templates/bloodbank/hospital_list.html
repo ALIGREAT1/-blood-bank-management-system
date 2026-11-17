@@ -1,0 +1,79 @@
+
+{% extends 'bloodbank/base.html' %}
+
+{% block title %}Hospital Records{% endblock %}
+
+{% block page_heading %}
+    <h1>Hospital Management</h1>
+    <p>View and manage registered hospitals.</p>
+{% endblock %}
+
+{% block content %}
+
+<div class="content-section">
+
+    <div class="section-header">
+        <h2>Registered Hospitals</h2>
+
+        <a href="{% url 'add_hospital' %}" class="submit-button">
+            + Register Hospital
+        </a>
+    </div>
+
+    <input
+        type="text"
+        data-table-search="#hospitalTable"
+        class="form-control"
+        placeholder="Search hospitals..."
+    >
+
+    <table class="donor-table" id="hospitalTable">
+
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Hospital Name</th>
+                <th>Address</th>
+                <th>Contact</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {% for hospital in hospitals %}
+
+            <tr>
+                <td>{{ hospital.hospitalid }}</td>
+                <td>{{ hospital.name }}</td>
+                <td>{{ hospital.address }}</td>
+                <td>{{ hospital.contact }}</td>
+                <td>{{ hospital.email }}</td>
+
+                <td>
+                    <a href="{% url 'update_hospital' hospital.hospitalid %}">
+                        Edit
+                    </a>
+
+                    <a href="{% url 'delete_hospital' hospital.hospitalid %}">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+
+            {% empty %}
+
+            <tr>
+                <td colspan="6">No hospitals registered yet.</td>
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}

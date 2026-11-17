@@ -1,0 +1,117 @@
+
+{% extends 'bloodbank/base.html' %}
+
+{% block title %}
+    Donor Records | BloodBank
+{% endblock %}
+
+{% block page_heading %}
+    <h1>Donor Management</h1>
+    <p>View and manage all registered blood donors.</p>
+{% endblock %}
+
+{% block content %}
+
+<div class="content-section">
+
+    <div class="section-heading">
+        <div>
+            <h2>Registered Donors</h2>
+            <p>Manage your registered donor records.</p>
+        </div>
+
+        <a href="{% url 'add_donor' %}" class="btn btn-primary">
+            + Register Donor
+        </a>
+    </div>
+
+    <!-- SEARCH BAR -->
+    <div class="search-container">
+
+        <input
+            type="text"
+            id="donorSearch"
+            data-table-search="#donorTable"
+            class="form-control"
+            placeholder="Search donors by name, ID, blood type or phone..."
+        >
+
+    </div>
+
+    <!-- DONOR TABLE -->
+    <div class="table-container">
+
+        <table id="donorTable">
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Age</th>
+                    <th>Blood Type</th>
+                    <th>Phone</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for donor in donors %}
+
+                <tr>
+
+                    <td>{{ donor.donorid }}</td>
+
+                    <td>{{ donor.firstname }}</td>
+
+                    <td>{{ donor.lastname }}</td>
+
+                    <td>{{ donor.age }}</td>
+
+                    <td>{{ donor.bloodtype }}</td>
+
+                    <td>{{ donor.phone }}</td>
+
+                    <td>
+                        <span class="status">
+                            {{ donor.status }}
+                        </span>
+                    </td>
+
+                    <td>
+
+                        <a href="{% url 'update_donor' donor.donorid %}"
+                           class="btn btn-secondary">
+                            Edit
+                        </a>
+
+                        <a href="{% url 'delete_donor' donor.donorid %}"
+                           class="btn btn-danger">
+                            Delete
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% empty %}
+
+                <tr>
+                    <td colspan="8" class="empty-message">
+                        No donors have been registered yet.
+                    </td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

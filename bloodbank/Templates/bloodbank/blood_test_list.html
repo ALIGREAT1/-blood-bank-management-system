@@ -1,0 +1,83 @@
+{% extends 'bloodbank/base.html' %}
+
+{% block title %}Blood Test Records{% endblock %}
+
+{% block page_heading %}
+<h1>Blood Testing Management</h1>
+{% endblock %}
+
+{% block content %}
+
+<div class="management-container">
+
+    <div class="management-header">
+        <h2>Laboratory Test Records</h2>
+
+        <a href="{% url 'add_blood_test' %}" class="btn btn-primary">
+            + Add Blood Test
+        </a>
+    </div>
+
+    <input
+        type="text"
+        placeholder="Search blood tests..."
+        data-table-search="#bloodTestTable"
+        class="form-control"
+    >
+
+    <table id="bloodTestTable" class="data-table">
+
+        <thead>
+            <tr>
+                <th>Test ID</th>
+                <th>Blood Unit</th>
+                <th>Donor</th>
+                <th>Test Type</th>
+                <th>Test Result</th>
+                <th>Lab Technician</th>
+                <th>Remarks</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {% for test in blood_tests %}
+
+            <tr>
+                <td>{{ test.testid }}</td>
+                <td>{{ test.bloodunit.bloodunitid }}</td>
+                <td>{{ test.bloodunit.donation.donor }}</td>
+                <td>{{ test.testtype }}</td>
+                <td>{{ test.testresult }}</td>
+                <td>{{ test.labtechnician }}</td>
+                <td>{{ test.remarks|default:"-" }}</td>
+
+                <td>
+                    <a href="{% url 'update_blood_test' test.testid %}">
+                        Edit
+                    </a>
+
+                    |
+
+                    <a href="{% url 'delete_blood_test' test.testid %}">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+
+            {% empty %}
+
+            <tr>
+                <td colspan="8">No blood test records available.</td>
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}

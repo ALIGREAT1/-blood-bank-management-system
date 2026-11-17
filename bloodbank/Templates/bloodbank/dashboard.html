@@ -1,0 +1,267 @@
+
+{% extends 'bloodbank/base.html' %}
+
+{% block title %}
+    Blood Bank Management System | Dashboard
+{% endblock %}
+
+{% block page_heading %}
+    <h1>Dashboard</h1>
+    <p>Welcome to your Blood Bank Management System.</p>
+{% endblock %}
+
+{% block content %}
+
+<!-- WELCOME BANNER -->
+<section class="welcome-banner">
+
+    <div class="welcome-text">
+
+        <span class="welcome-tag">BLOOD BANK MANAGEMENT</span>
+
+        <h2>Welcome Back, Administrator!</h2>
+
+        <p>
+            Manage blood donations, monitor blood inventory,
+            register donors and coordinate blood requests
+            through one central platform.
+        </p>
+
+        <a href="{% url 'add_donor' %}" class="welcome-button">
+            + Register New Donor
+        </a>
+
+    </div>
+
+    <div class="welcome-symbol">🩸</div>
+
+</section>
+
+<!-- STATISTICS SECTION -->
+<section class="dashboard-section">
+
+    <div class="section-heading">
+        <div>
+            <h2>System Overview</h2>
+            <p>A summary of your blood bank activities.</p>
+        </div>
+    </div>
+
+    <div class="statistics">
+
+        <!-- DONORS -->
+        <div class="stat-card">
+
+            <div class="stat-top">
+                <span class="stat-label">REGISTERED DONORS</span>
+                <div class="stat-icon donor-icon">👥</div>
+            </div>
+
+            <h2>{{ total_donors }}</h2>
+
+            <p>Total registered donors</p>
+
+            <a href="{% url 'donor_list' %}">
+                View donors →
+            </a>
+
+        </div>
+
+        <!-- BLOOD UNITS -->
+        <div class="stat-card">
+
+            <div class="stat-top">
+                <span class="stat-label">BLOOD INVENTORY</span>
+                <div class="stat-icon blood-icon">🩸</div>
+            </div>
+
+            <h2>{{ total_blood_units }}</h2>
+
+            <p>Total recorded blood units</p>
+
+            <a href="/admin/bloodbank/bloodunit/">
+                View inventory →
+            </a>
+
+        </div>
+
+        <!-- HOSPITALS -->
+        <div class="stat-card">
+
+            <div class="stat-top">
+                <span class="stat-label">REGISTERED HOSPITALS</span>
+                <div class="stat-icon hospital-icon">🏥</div>
+            </div>
+
+            <h2>{{ total_hospitals }}</h2>
+
+            <p>Hospitals in the system</p>
+
+            <a href="/admin/bloodbank/hospital/">
+                View hospitals →
+            </a>
+
+        </div>
+
+        <!-- BLOOD REQUESTS -->
+        <div class="stat-card">
+
+            <div class="stat-top">
+                <span class="stat-label">BLOOD REQUESTS</span>
+                <div class="stat-icon request-icon">📋</div>
+            </div>
+
+            <h2>{{ total_requests }}</h2>
+
+            <p>Total recorded blood requests</p>
+
+            <a href="/admin/bloodbank/bloodrequest/">
+                View requests →
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- QUICK ACTIONS -->
+<section class="dashboard-section">
+
+    <div class="section-heading">
+        <div>
+            <h2>Quick Actions</h2>
+            <p>Quickly access frequently used functions.</p>
+        </div>
+    </div>
+
+    <div class="action-grid">
+
+        <!-- REGISTER DONOR -->
+        <a href="{% url 'add_donor' %}" class="action-card">
+
+            <div class="action-icon red">👤</div>
+
+            <div>
+                <h3>Register Donor</h3>
+                <p>Add a new blood donor.</p>
+            </div>
+
+            <span class="action-arrow">→</span>
+
+        </a>
+
+        <!-- ADD HOSPITAL -->
+        <a href="/admin/bloodbank/hospital/add/"
+           class="action-card">
+
+            <div class="action-icon blue">🏥</div>
+
+            <div>
+                <h3>Add Hospital</h3>
+                <p>Register a new hospital.</p>
+            </div>
+
+            <span class="action-arrow">→</span>
+
+        </a>
+
+        <!-- RECORD DONATION -->
+        <a href="/admin/bloodbank/donation/add/"
+           class="action-card">
+
+            <div class="action-icon green">💉</div>
+
+            <div>
+                <h3>Record Donation</h3>
+                <p>Record a blood donation.</p>
+            </div>
+
+            <span class="action-arrow">→</span>
+
+        </a>
+
+        <!-- CREATE REQUEST -->
+        <a href="/admin/bloodbank/bloodrequest/add/"
+           class="action-card">
+
+            <div class="action-icon orange">📋</div>
+
+            <div>
+                <h3>Create Blood Request</h3>
+                <p>Record a new blood request.</p>
+            </div>
+
+            <span class="action-arrow">→</span>
+
+        </a>
+
+    </div>
+
+</section>
+
+<!-- MANAGEMENT PANEL -->
+<section class="dashboard-section">
+
+    <div class="section-heading">
+        <div>
+            <h2>System Management</h2>
+            <p>Access and manage the main system records.</p>
+        </div>
+    </div>
+
+    <div class="management-panel">
+
+        <!-- RECIPIENT MANAGEMENT -->
+        <div class="management-item">
+
+            <div class="management-icon">🧑</div>
+
+            <div>
+                <h3>Recipient Management</h3>
+                <p>Manage registered blood recipients.</p>
+            </div>
+
+            <a href="/admin/bloodbank/recipient/">
+                Manage →
+            </a>
+
+        </div>
+
+        <!-- COLLECTION SITES -->
+        <div class="management-item">
+
+            <div class="management-icon">📍</div>
+
+            <div>
+                <h3>Collection Sites</h3>
+                <p>Manage blood collection locations.</p>
+            </div>
+
+            <a href="/admin/bloodbank/collectionsite/">
+                Manage →
+            </a>
+
+        </div>
+
+        <!-- BLOOD TESTING -->
+        <div class="management-item">
+
+            <div class="management-icon">🔬</div>
+
+            <div>
+                <h3>Blood Testing</h3>
+                <p>Manage blood screening and test records.</p>
+            </div>
+
+            <a href="/admin/bloodbank/bloodtest/">
+                Manage →
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

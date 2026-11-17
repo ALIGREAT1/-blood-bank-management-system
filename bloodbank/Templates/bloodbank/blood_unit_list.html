@@ -1,0 +1,83 @@
+{% extends 'bloodbank/base.html' %}
+
+{% block title %}Blood Inventory{% endblock %}
+
+{% block page_heading %}
+<h1>Blood Inventory Management</h1>
+{% endblock %}
+
+{% block content %}
+
+<div class="management-container">
+
+    <div class="management-header">
+        <h2>Registered Blood Units</h2>
+
+        <a href="{% url 'add_blood_unit' %}" class="btn btn-primary">
+            + Add Blood Unit
+        </a>
+    </div>
+
+    <input
+        type="text"
+        placeholder="Search blood units..."
+        data-table-search="#bloodUnitTable"
+        class="form-control"
+    >
+
+    <table id="bloodUnitTable" class="data-table">
+
+        <thead>
+            <tr>
+                <th>Unit ID</th>
+                <th>Donor</th>
+                <th>Blood Type</th>
+                <th>Volume (ml)</th>
+                <th>Donation Date</th>
+                <th>Expiry Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {% for unit in blood_units %}
+
+            <tr>
+                <td>{{ unit.bloodunitid }}</td>
+                <td>{{ unit.donation.donor }}</td>
+                <td>{{ unit.donation.bloodtype }}</td>
+                <td>{{ unit.volume }}</td>
+                <td>{{ unit.donation.donationdate }}</td>
+                <td>{{ unit.expirydate }}</td>
+                <td>{{ unit.status }}</td>
+
+                <td>
+                    <a href="{% url 'update_blood_unit' unit.bloodunitid %}">
+                        Edit
+                    </a>
+
+                    |
+
+                    <a href="{% url 'delete_blood_unit' unit.bloodunitid %}">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+
+            {% empty %}
+
+            <tr>
+                <td colspan="8">No blood units registered yet.</td>
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}

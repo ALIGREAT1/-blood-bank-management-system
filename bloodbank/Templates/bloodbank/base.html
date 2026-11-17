@@ -1,0 +1,155 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% block title %}Blood Bank Management System{% endblock %}
+    </title>
+
+    <!-- Main CSS -->
+    <link rel="stylesheet"
+          href="{% static 'bloodbank/css/style.css' %}">
+
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <div class="logo-icon">+</div>
+            <span>BloodBank</span>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a href="{% url 'dashboard' %}" class="nav-link">
+                Dashboard
+            </a>
+
+            <a href="{% url 'donor_list' %}" class="nav-link">
+                Donors
+            </a>
+
+            <a href="/admin/bloodbank/recipient/" class="nav-link">
+                Recipients
+            </a>
+
+            <a href="{% url 'blood_unit_list' %}" class="nav-link">
+                Blood Inventory
+            </a>
+
+           <a href="{% url 'donation_list' %}" class="nav-link">
+                Donations
+            </a>
+
+            <a href="{% url 'blood_request_list' %}">
+                Blood Requests
+            </a>
+
+            <a href="{% url 'hospital_list' %}" class="nav-link">
+                Hospitals
+            </a>
+        
+
+            <a href="{% url 'collection_site_list' %}">
+                Collection Sites
+           </a>
+
+            <a href="{% url 'blood_test_list' %}" class="nav-link">
+                Blood Tests
+            </a>
+
+            <a href="/admin/" class="nav-link">
+                Administration
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <!-- TOP BAR -->
+        <header class="topbar">
+
+            <div class="page-heading">
+                {% block page_heading %}
+                    Blood Bank Management System
+                {% endblock %}
+            </div>
+
+            
+<div class="topbar-right">
+
+    <div class="user-profile">
+        {% if request.user.is_authenticated %}
+            {{ request.user.username }}
+        {% else %}
+            Guest
+        {% endif %}
+    </div>
+
+    {% if request.user.is_authenticated %}
+        <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="logout-button">
+                Logout
+            </button>
+        </form>
+    {% endif %}
+
+</div>
+
+
+            </div>
+
+        </header>
+
+
+        <!-- NOTIFICATIONS -->
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+
+        <!-- PAGE CONTENT -->
+        {% block content %}
+        {% endblock %}
+
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <p>
+                &copy; {% now "Y" %}
+                Blood Bank Management System.
+                All rights reserved.
+            </p>
+        </footer>
+
+    </main>
+
+</div>
+
+
+<!-- JavaScript -->
+<script src="{% static 'bloodbank/js/main.js' %}" defer></script>
+
+{% block extra_js %}{% endblock %}
+
+</body>
+</html>

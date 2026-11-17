@@ -1,0 +1,90 @@
+
+{% extends 'bloodbank/base.html' %}
+
+{% block content %}
+
+<div class="content-card">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Blood Requests</h2>
+
+        <a href="{% url 'add_blood_request' %}" class="btn btn-primary">
+            + Add Blood Request
+        </a>
+    </div>
+
+    <input
+        type="text"
+        class="form-control mb-3"
+        placeholder="Search blood requests..."
+        data-table-search
+    >
+
+    <div class="table-responsive">
+
+        <table class="table table-striped table-hover">
+
+            <thead>
+                <tr>
+                    <th>Request ID</th>
+                    <th>Hospital</th>
+                    <th>Recipient</th>
+                    <th>Blood Type</th>
+                    <th>Units Required</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                    <th>Request Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for blood_request in blood_requests %}
+
+                <tr>
+                    <td>{{ blood_request.requestid }}</td>
+                    <td>{{ blood_request.hospital }}</td>
+                    <td>{{ blood_request.recipient }}</td>
+                    <td>{{ blood_request.bloodtype }}</td>
+                    <td>{{ blood_request.unitsrequired }}</td>
+                    <td>{{ blood_request.priority }}</td>
+                    <td>{{ blood_request.status }}</td>
+                    <td>{{ blood_request.requestdate }}</td>
+
+                    <td>
+                        <a
+                            href="{% url 'update_blood_request' blood_request.requestid %}"
+                            class="btn btn-sm btn-warning"
+                        >
+                            Edit
+                        </a>
+
+                        <a
+                            href="{% url 'delete_blood_request' blood_request.requestid %}"
+                            class="btn btn-sm btn-danger"
+                        >
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+
+                {% empty %}
+
+                <tr>
+                    <td colspan="9" class="text-center">
+                        No blood requests have been recorded yet.
+                    </td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'bloodbank/base.html' %}
+
+{% block title %}Delete Blood Test{% endblock %}
+
+{% block page_heading %}
+<h1>Delete Blood Test</h1>
+{% endblock %}
+
+{% block content %}
+
+<div class="form-container">
+
+    <h2>Confirm Deletion</h2>
+
+    <p>
+        Are you sure you want to delete test
+        <strong>#{{ blood_test.testid }}</strong>
+        for Blood Unit
+        <strong>#{{ blood_test.bloodunit.bloodunitid }}</strong>?
+    </p>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <button type="submit" class="btn btn-danger">
+            Yes, Delete
+        </button>
+
+        <a href="{% url 'blood_test_list' %}" class="btn btn-secondary">
+            Cancel
+        </a>
+
+    </form>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,33 @@
+
+{% extends 'bloodbank/base.html' %}
+
+{% block title %}Delete Hospital{% endblock %}
+
+{% block page_heading %}
+    <h1>Delete Hospital</h1>
+{% endblock %}
+
+{% block content %}
+
+<div class="content-section">
+
+    <h2>Confirm Deletion</h2>
+
+    <p>
+        Are you sure you want to delete
+        <strong>{{ hospital.name }}</strong>?
+    </p>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <button type="submit" class="submit-button">
+            Confirm Delete
+        </button>
+
+        <a href="{% url 'hospital_list' %}">Cancel</a>
+    </form>
+
+</div>
+
+{% endblock %}

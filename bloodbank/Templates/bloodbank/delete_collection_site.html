@@ -1,0 +1,30 @@
+
+{% extends 'bloodbank/base.html' %}
+
+{% block content %}
+
+<div class="content-card">
+
+    <h2>Delete Collection Site</h2>
+
+    <p>
+        Are you sure you want to delete
+        <strong>{{ collection_site.name }}</strong>
+        located at <strong>{{ collection_site.location }}</strong>?
+    </p>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <button type="submit" class="btn btn-danger">
+            Yes, Delete Collection Site
+        </button>
+
+        <a href="{% url 'collection_site_list' %}" class="btn btn-secondary">
+            Cancel
+        </a>
+    </form>
+
+</div>
+
+{% endblock %}

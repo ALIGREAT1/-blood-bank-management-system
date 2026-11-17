@@ -1,0 +1,29 @@
+{% extends 'bloodbank/base.html' %}
+
+{% block title %}Blood Testing{% endblock %}
+
+{% block page_heading %}
+<h1>{{ page_title|default:"Register Blood Test" }}</h1>
+{% endblock %}
+
+{% block content %}
+
+<div class="form-container">
+
+    <form method="POST">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit" class="btn btn-primary">
+            {{ button_text|default:"Save Blood Test" }}
+        </button>
+
+        <a href="{% url 'blood_test_list' %}" class="btn btn-secondary">
+            Cancel
+        </a>
+    </form>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,39 @@
+
+{% extends 'bloodbank/base.html' %}
+
+{% block title %}Delete Donor | Blood Bank{% endblock %}
+
+{% block page_heading %}
+    <h1>Delete Donor</h1>
+    <p>Confirm donor record deletion.</p>
+{% endblock %}
+
+{% block content %}
+
+<div class="form-container">
+
+    <h2>Are you sure?</h2>
+
+    <p>
+        You are about to delete:
+        <strong>{{ donor.firstname }} {{ donor.lastname }}</strong>
+    </p>
+
+    <p>This action cannot be undone.</p>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <button type="submit" class="btn btn-danger">
+            Yes, Delete Donor
+        </button>
+
+        <a href="{% url 'donor_list' %}"
+           class="btn btn-secondary">
+            Cancel
+        </a>
+    </form>
+
+</div>
+
+{% endblock %}

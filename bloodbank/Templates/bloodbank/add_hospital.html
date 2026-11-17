@@ -1,0 +1,33 @@
+
+{% extends 'bloodbank/base.html' %}
+
+{% block title %}
+    {{ page_title|default:"Register Hospital" }}
+{% endblock %}
+
+{% block page_heading %}
+    <h1>{{ page_title|default:"Register New Hospital" }}</h1>
+    <p>Enter hospital information below.</p>
+{% endblock %}
+
+{% block content %}
+
+<div class="content-section">
+
+    <h2>Hospital Information</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit" class="submit-button">
+            {{ button_text|default:"Register Hospital" }}
+        </button>
+
+        <a href="{% url 'hospital_list' %}">Cancel</a>
+    </form>
+
+</div>
+
+{% endblock %}
